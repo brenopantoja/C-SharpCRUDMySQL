@@ -217,7 +217,7 @@ namespace CRUDMySQL
                 MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 load_contact();
-                clearButtons();
+                clearButtons();//It has doing clear buttons
             }
 
             catch (MySqlException ex)
