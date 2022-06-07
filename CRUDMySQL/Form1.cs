@@ -198,12 +198,14 @@ namespace CRUDMySQL
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
+            
             try {
                 conection = new MySqlConnection(data_source);
                 conection.Open();
+
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conection;
-
+             
                 cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
             
 
@@ -297,8 +299,8 @@ namespace CRUDMySQL
             }
             finally {
                 conection.Close();
-            }
-            */
+            }*/
+            
         }
     }
 }
