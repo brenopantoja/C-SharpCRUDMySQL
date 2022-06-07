@@ -206,11 +206,12 @@ namespace CRUDMySQL
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conection;
              
-               // cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
-              cmd.CommandText = " SELECT * FROM contatos";
+                cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
+              //  cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE" +;
+                //cmd.CommandText = " SELECT * FROM contatos";
 
 
-                cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar + "%" );
+                cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar.Text + "%" );
                 cmd.Prepare();
                 MySqlDataReader reader = cmd.ExecuteReader();
               
