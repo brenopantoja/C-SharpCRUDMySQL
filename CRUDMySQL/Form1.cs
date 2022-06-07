@@ -215,6 +215,9 @@ namespace CRUDMySQL
 
 
                 MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                load_contact();
+                clearButtons();
             }
 
             catch (MySqlException ex)
@@ -242,15 +245,16 @@ namespace CRUDMySQL
         }
 
 
-
+        private void clearButtons() {
+            textName.Text = string.Empty;
+            textEmail.Text = String.Empty;
+            textTelefone.Text = string.Empty;
+        }
 
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            textName.Text = string.Empty;
-            textEmail.Text = String.Empty;
-            textTelefone.Text = string.Empty;
-
+            clearButtons();
         }
 
         private void label1_Click_1(object sender, EventArgs e)
