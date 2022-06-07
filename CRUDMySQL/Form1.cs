@@ -32,7 +32,68 @@ namespace CRUDMySQL
             listViewContatos.Columns.Add("Email", 150, HorizontalAlignment.Left);
             listViewContatos.Columns.Add("Telefone", 90, HorizontalAlignment.Left);
 
+            load_contact();
 
+
+        }
+
+        private void load_contact()
+        {
+            try
+            {
+                conection = new MySqlConnection(data_source);
+                conection.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conection;
+
+                  cmd.CommandText = " SELECT * FROM contatos ORDER BY id DESC";
+               // cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
+
+                //cmd.CommandText = " SELECT * FROM contatos";
+
+
+                // cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar.Text + "%");
+                cmd.Prepare();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                listViewContatos.Items.Clear();
+
+                while (reader.Read())
+                {// It has taking all of the Data Base
+                    string[] rowlist = {
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                    };
+                    // var rowlistView = new ListViewItem(rowlist);
+                    listViewContatos.Items.Add(new ListViewItem(rowlist));
+                }
+            }
+            catch (MySqlException ex)
+            // catch (MySqlException ex)
+            {
+
+                MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // MessageBox.Show("Error ", +ex.Number + "Ocorreu: " + ex.Message, MessageBoxButtons.OK,
+                //  MessageBoxIcon.Error);
+                // MessageBox.Show(ex.Message);
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ocorreu: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            finally
+            {
+
+                conection.Close();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -154,7 +215,7 @@ namespace CRUDMySQL
 
 
                 MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }  
+            }
 
             catch (MySqlException ex)
             // catch (MySqlException ex)
@@ -167,7 +228,8 @@ namespace CRUDMySQL
 
             }
 
-           catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(" Ocorreu: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
@@ -175,9 +237,9 @@ namespace CRUDMySQL
             {
 
                 conection.Close();
-            } 
-        
-        } 
+            }
+
+        }
 
 
 
@@ -198,35 +260,38 @@ namespace CRUDMySQL
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            
-            try {
+
+            try
+            {
                 conection = new MySqlConnection(data_source);
                 conection.Open();
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conection;
-             
+
+                //   cmd.CommandText = " SELECT * FROM contatos ORDER BY id DESC";
                 cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
-              //  cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE" +;
+
                 //cmd.CommandText = " SELECT * FROM contatos";
 
 
-                cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar.Text + "%" );
+                 cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar.Text + "%");
                 cmd.Prepare();
                 MySqlDataReader reader = cmd.ExecuteReader();
-              
+
 
 
                 listViewContatos.Items.Clear();
-            
-                while (reader.Read()) {// It has taking all of the Data Base
+
+                while (reader.Read())
+                {// It has taking all of the Data Base
                     string[] rowlist = {
                         reader.GetString(0),
                         reader.GetString(1),
                         reader.GetString(2),
                         reader.GetString(3),
                     };
-                   // var rowlistView = new ListViewItem(rowlist);
+                    // var rowlistView = new ListViewItem(rowlist);
                     listViewContatos.Items.Add(new ListViewItem(rowlist));
                 }
             }
@@ -252,57 +317,60 @@ namespace CRUDMySQL
                 conection.Close();
             }
 
-            /*
-            try
-            { //It has taking data of the Data Base
+            /* }
 
-                string qBuscar = "'%" + textBoxBuscar.Text + "%'";
+           try
+           { //It has taking data of the Data Base
 
-                //select * from contatos where  nome '%Breno%'
-               
-                conection = new MySqlConnection(data_source);
-                string sql = "SELECT *" +
-                    " FROM  contatos " +
-                    "WHERE nome LIKE " + qBuscar + "OR email LIKE" + qBuscar;
-                // It has ope connetion in Data Base
-                conection.Open();
+               string qBuscar = "'%" + textBoxBuscar.Text + "%'";
 
-                            
-                MySqlCommand command = new MySqlCommand(sql, conection);
+               //select * from contatos where  nome '%Breno%'
 
-               MySqlDataReader reader =    command.ExecuteReader();
-                listViewContatos.Items.Clear(); //It has clearing listView of the screen
-
-                while (reader.Read()) { //The loop to execute and read the data
-                    // The row has showing in screen
-                    string[] rowlist =
-                        {
-                        reader.GetString(0),
-                        reader.GetString(1),
-                        reader.GetString(2),
-                        reader.GetString(3),
-
-                        };
-                    var rowlistView = new ListViewItem(rowlist);
-                    listViewContatos.Items.Add(rowlistView);
-                }
+               conection = new MySqlConnection(data_source);
+               string sql = "SELECT *" +
+                   " FROM  contatos " +
+                   "WHERE nome LIKE " + qBuscar + "OR email LIKE" + qBuscar;
+               // It has ope connetion in Data Base
+               conection.Open();
 
 
+               MySqlCommand command = new MySqlCommand(sql, conection);
 
+              MySqlDataReader reader =    command.ExecuteReader();
+               listViewContatos.Items.Clear(); //It has clearing listView of the screen
+
+               while (reader.Read()) { //The loop to execute and read the data
+                   // The row has showing in screen
+                   string[] rowlist =
+                       {
+                       reader.GetString(0),
+                       reader.GetString(1),
+                       reader.GetString(2),
+                       reader.GetString(3),
+
+                       };
+                   var rowlistView = new ListViewItem(rowlist);
+                   listViewContatos.Items.Add(rowlistView);
+               }
 
 
 
+           }
+           catch (Exception ex)
+           {
+               MessageBox.Show(ex.Message);
+           }
+           finally {
+               conection.Close();
+           }*/
 
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally {
-                conection.Close();
-            }*/
-            
         }
+
+
+        private void buttonLimparBusca_Click(object sender, EventArgs e)
+        {
+            textBoxBuscar.Clear();
+        }
+
     }
 }

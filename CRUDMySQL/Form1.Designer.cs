@@ -41,12 +41,13 @@ namespace CRUDMySQL
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxBuscar = new System.Windows.Forms.TextBox();
             this.buttonBuscar = new System.Windows.Forms.Button();
+            this.buttonLimparBusca = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 109);
+            this.label2.Location = new System.Drawing.Point(72, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 1;
@@ -55,7 +56,7 @@ namespace CRUDMySQL
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(78, 148);
+            this.label3.Location = new System.Drawing.Point(72, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 2;
@@ -63,7 +64,7 @@ namespace CRUDMySQL
             // 
             // buttonSalvar
             // 
-            this.buttonSalvar.Location = new System.Drawing.Point(78, 195);
+            this.buttonSalvar.Location = new System.Drawing.Point(75, 230);
             this.buttonSalvar.Name = "buttonSalvar";
             this.buttonSalvar.Size = new System.Drawing.Size(55, 23);
             this.buttonSalvar.TabIndex = 3;
@@ -73,21 +74,21 @@ namespace CRUDMySQL
             // 
             // textName
             // 
-            this.textName.Location = new System.Drawing.Point(78, 77);
+            this.textName.Location = new System.Drawing.Point(75, 74);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(136, 20);
             this.textName.TabIndex = 4;
             // 
             // textTelefone
             // 
-            this.textTelefone.Location = new System.Drawing.Point(81, 125);
+            this.textTelefone.Location = new System.Drawing.Point(75, 127);
             this.textTelefone.Name = "textTelefone";
             this.textTelefone.Size = new System.Drawing.Size(133, 20);
             this.textTelefone.TabIndex = 5;
             // 
             // textEmail
             // 
-            this.textEmail.Location = new System.Drawing.Point(81, 169);
+            this.textEmail.Location = new System.Drawing.Point(75, 191);
             this.textEmail.Name = "textEmail";
             this.textEmail.Size = new System.Drawing.Size(133, 20);
             this.textEmail.TabIndex = 6;
@@ -95,7 +96,7 @@ namespace CRUDMySQL
             // labelNome
             // 
             this.labelNome.AutoSize = true;
-            this.labelNome.Location = new System.Drawing.Point(78, 61);
+            this.labelNome.Location = new System.Drawing.Point(75, 58);
             this.labelNome.Name = "labelNome";
             this.labelNome.Size = new System.Drawing.Size(35, 13);
             this.labelNome.TabIndex = 0;
@@ -104,7 +105,7 @@ namespace CRUDMySQL
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(139, 195);
+            this.buttonClear.Location = new System.Drawing.Point(136, 230);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 7;
@@ -115,16 +116,16 @@ namespace CRUDMySQL
             // listViewContatos
             // 
             this.listViewContatos.HideSelection = false;
-            this.listViewContatos.Location = new System.Drawing.Point(268, 85);
+            this.listViewContatos.Location = new System.Drawing.Point(220, 85);
             this.listViewContatos.Name = "listViewContatos";
-            this.listViewContatos.Size = new System.Drawing.Size(425, 197);
+            this.listViewContatos.Size = new System.Drawing.Size(460, 185);
             this.listViewContatos.TabIndex = 8;
             this.listViewContatos.UseCompatibleStateImageBehavior = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(265, 42);
+            this.label1.Location = new System.Drawing.Point(217, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 13);
             this.label1.TabIndex = 9;
@@ -133,14 +134,14 @@ namespace CRUDMySQL
             // 
             // textBoxBuscar
             // 
-            this.textBoxBuscar.Location = new System.Drawing.Point(268, 58);
+            this.textBoxBuscar.Location = new System.Drawing.Point(220, 58);
             this.textBoxBuscar.Name = "textBoxBuscar";
             this.textBoxBuscar.Size = new System.Drawing.Size(267, 20);
             this.textBoxBuscar.TabIndex = 10;
             // 
             // buttonBuscar
             // 
-            this.buttonBuscar.Location = new System.Drawing.Point(552, 56);
+            this.buttonBuscar.Location = new System.Drawing.Point(493, 55);
             this.buttonBuscar.Name = "buttonBuscar";
             this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
             this.buttonBuscar.TabIndex = 11;
@@ -148,11 +149,22 @@ namespace CRUDMySQL
             this.buttonBuscar.UseVisualStyleBackColor = true;
             this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
+            // buttonLimparBusca
+            // 
+            this.buttonLimparBusca.Location = new System.Drawing.Point(574, 56);
+            this.buttonLimparBusca.Name = "buttonLimparBusca";
+            this.buttonLimparBusca.Size = new System.Drawing.Size(75, 23);
+            this.buttonLimparBusca.TabIndex = 12;
+            this.buttonLimparBusca.Text = "Limpar";
+            this.buttonLimparBusca.UseVisualStyleBackColor = true;
+            this.buttonLimparBusca.Click += new System.EventHandler(this.buttonLimparBusca_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 294);
+            this.Controls.Add(this.buttonLimparBusca);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.textBoxBuscar);
             this.Controls.Add(this.label1);
@@ -186,6 +198,7 @@ namespace CRUDMySQL
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxBuscar;
         private System.Windows.Forms.Button buttonBuscar;
+        private System.Windows.Forms.Button buttonLimparBusca;
     }
 }
 
