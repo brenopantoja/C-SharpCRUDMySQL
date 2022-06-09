@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;// It has using DataBase MySQL
 
 /* Command of the Data Base:
+ * 
+ * 
  create database agenda;
 
 use agenda;
@@ -40,7 +42,7 @@ namespace CRUDMySQL
 
             /*
             idContat_Select = null;
-            idContat_Select = 10;*/
+            idContat_Select = 23;*/
 
             listViewContatos.View = View.Details;
             listViewContatos.LabelEdit = true;
@@ -320,7 +322,7 @@ namespace CRUDMySQL
             }
 
             catch (MySqlException ex)
-            // catch (MySqlException ex)
+            
             {
 
                 MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
