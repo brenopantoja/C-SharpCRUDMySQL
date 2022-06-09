@@ -10,12 +10,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;// It has using DataBase MySQL
 
+/* Command of the Data Base:
+ create database agenda;
+
+use agenda;
+
+create table contatos(
+id int auto_increment,
+nome varchar(150),
+email varchar(150),
+telefone varchar(12),
+primary key(id)
+);
+ */
+
 namespace CRUDMySQL
 {
     public partial class Form1 : Form
     {
         private MySqlConnection conection;
-        private string data_source = "datasource=localhost; username=root; password=; database=db_agenda";
+        private string data_source = "datasource=localhost; username=root; password=; database=agenda";
 
         private int ?idContat_Select = null;// Type anull: It has taking any value or varilbe type
 
