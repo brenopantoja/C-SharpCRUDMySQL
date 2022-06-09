@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;// It has using DataBase MySQL
 
-/* Command of the Data Base:
+/* Command of the Data Base: MySQl:
   * 
  create database agenda;
 
