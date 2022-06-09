@@ -11,8 +11,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;// It has using DataBase MySQL
 
 /* Command of the Data Base:
- 
- * 
+  * 
  create database agenda;
 
 use agenda;
