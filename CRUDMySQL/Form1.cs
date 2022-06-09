@@ -16,10 +16,17 @@ namespace CRUDMySQL
     {
         private MySqlConnection conection;
         private string data_source = "datasource=localhost; username=root; password=; database=db_agenda";
+
+        private int ?idContat_Select = null;// Type anull: It has taking any value
+
         public Form1()
         {
             InitializeComponent();
             // It has showing column of form good:  Data of the Data Base, width, position in List View, 
+
+            /*
+            idContat_Select = null;
+            idContat_Select = 10;*/
 
             listViewContatos.View = View.Details;
             listViewContatos.LabelEdit = true;
@@ -168,6 +175,83 @@ namespace CRUDMySQL
                 //  cmd.Connection = conection;
                 // It has calling the SQL Command
 
+              //  MessageBox.Show("Id selecionado:" + idContat_Select);
+
+                if (idContat_Select == null)
+                {
+                    //Insert
+
+            
+                    //cmd.CommandText = "INSERT INTO contatos (nome, email,telefone) " +
+                    //"VALUES (@nome, @email, @telefone)";
+
+
+
+                    //It has preparing the field of the View
+                    cmd.Parameters.AddWithValue("@nome", textName.Text);
+
+                    cmd.Parameters.AddWithValue("@email", textEmail.Text);
+                    cmd.Parameters.AddWithValue("@telefone", textTelefone.Text);
+                    cmd.Prepare();
+
+                    //cmd.ExecuteNonQuery();//It has executing the insert in Data Base
+
+                 
+
+                   // MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            
+                    cmd.CommandText = "INSERT INTO contatos (nome, email,telefone) " +
+                    "VALUES (@nome, @email, @telefone)";
+
+                    cmd.ExecuteNonQuery();//It has executing the insert in Data Base
+                    /*
+                    //It has preparing the field of the View
+                    cmd.Parameters.AddWithValue("@nome", textName.Text);
+
+                    cmd.Parameters.AddWithValue("@email", textEmail.Text);
+                    cmd.Parameters.AddWithValue("@telefone", textTelefone.Text);*/
+                    //                    cmd.Prepare();
+
+                    //cmd.ExecuteNonQuery();//It has executing the insert in Data Base
+
+
+
+                    MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    load_contact();
+                    clearButtons();//It has doing clear buttons
+
+                }
+
+            
+                else { //Update 
+
+                    cmd.CommandText = "UPDATE contatos SET" +
+                        " nome=@nome, email=@email,telefone=@telefone " +
+                    "WHERE id=@id ";
+
+
+
+                    //It has preparing the field of the View
+                    cmd.Parameters.AddWithValue("@nome", textName.Text);
+
+                    cmd.Parameters.AddWithValue("@email", textEmail.Text);
+                    cmd.Parameters.AddWithValue("@telefone", textTelefone.Text);
+                    cmd.Parameters.AddWithValue("@id", idContat_Select);
+                    cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();//It has executing the Update in Data Base
+
+
+
+                    MessageBox.Show("Dados Atualizado na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                }
+
+                /*
+
                 //MySqlCommand cmd = new MySqlCommand( "INSERT INTO contatos VALUES(NULL,@nome, @email, @telefone) " , conection);
                 cmd.CommandText = "INSERT INTO contatos (nome, email,telefone) " +
                 //  "VALUES " +
@@ -192,6 +276,7 @@ namespace CRUDMySQL
 
 
                 //It has preparing the field of the View
+                /*
                 cmd.Parameters.AddWithValue("@nome", textName.Text);
 
                 cmd.Parameters.AddWithValue("@email", textEmail.Text);
@@ -213,11 +298,11 @@ namespace CRUDMySQL
                 //conection.Open();
                 //    cmd.ExecuteNonQuery();//It has executing the insert in Data Base
 
-
+                /*
                 MessageBox.Show("Dados inseridos na Data Base !", "Sucesso..", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 load_contact();
-                clearButtons();//It has doing clear buttons
+                clearButtons();//It has doing clear buttons */
             }
 
             catch (MySqlException ex)
@@ -246,6 +331,7 @@ namespace CRUDMySQL
 
 
         private void clearButtons() {
+            textName.Focus();
             textName.Text = string.Empty;
             textEmail.Text = String.Empty;
             textTelefone.Text = string.Empty;
@@ -254,6 +340,7 @@ namespace CRUDMySQL
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            idContat_Select= null;
             clearButtons();
         }
 
@@ -376,5 +463,22 @@ namespace CRUDMySQL
             textBoxBuscar.Clear();
         }
 
+        private void listViewContatos_SelectedIndexChanged(object sender, EventArgs e)
+        {// It has taking each of the selection
+            ListView.SelectedListViewItemCollection items_select= listViewContatos.SelectedItems;
+;
+                foreach (ListViewItem item in items_select) {// Foreach has taking each item selection and it has showing in buttons
+
+                idContat_Select = Convert.ToInt32(item.SubItems[0].Text);
+
+                textName.Text = item.SubItems[1].Text;
+                textEmail.Text = item.SubItems[2].Text;
+                textTelefone.Text = item.SubItems[3].Text;
+
+                //MessageBox.Show("Id selecionado:" + idContat_Select);
+            }
+
+          
+        }
     }
 }

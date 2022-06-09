@@ -117,10 +117,12 @@ namespace CRUDMySQL
             // 
             this.listViewContatos.HideSelection = false;
             this.listViewContatos.Location = new System.Drawing.Point(220, 85);
+            this.listViewContatos.MultiSelect = false;
             this.listViewContatos.Name = "listViewContatos";
             this.listViewContatos.Size = new System.Drawing.Size(460, 185);
             this.listViewContatos.TabIndex = 8;
             this.listViewContatos.UseCompatibleStateImageBehavior = false;
+            this.listViewContatos.SelectedIndexChanged += new System.EventHandler(this.listViewContatos_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -178,7 +180,7 @@ namespace CRUDMySQL
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelNome);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Agenda de Contatos";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
