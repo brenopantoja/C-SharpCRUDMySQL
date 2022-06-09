@@ -380,7 +380,7 @@ namespace CRUDMySQL
                 //   cmd.CommandText = " SELECT * FROM contatos ORDER BY id DESC";
                 cmd.CommandText = " SELECT * FROM contatos WHERE nome LIKE @q OR email LIKE @q";
 
-                //cmd.CommandText = " SELECT * FROM contatos";
+                
 
 
                  cmd.Parameters.AddWithValue("@q", "%" + textBoxBuscar.Text + "%");
