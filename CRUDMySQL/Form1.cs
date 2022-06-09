@@ -17,7 +17,7 @@ namespace CRUDMySQL
         private MySqlConnection conection;
         private string data_source = "datasource=localhost; username=root; password=; database=db_agenda";
 
-        private int ?idContat_Select = null;// Type anull: It has taking any value
+        private int ?idContat_Select = null;// Type anull: It has taking any value or varilbe type
 
         public Form1()
         {
@@ -335,6 +335,8 @@ namespace CRUDMySQL
             textName.Text = string.Empty;
             textEmail.Text = String.Empty;
             textTelefone.Text = string.Empty;
+
+            buttonDelete.Visible = false;// Button delete has staying hide
         }
 
 
@@ -342,6 +344,7 @@ namespace CRUDMySQL
         {
             idContat_Select= null;
             clearButtons();
+
         }
 
         private void label1_Click_1(object sender, EventArgs e)
@@ -475,10 +478,84 @@ namespace CRUDMySQL
                 textEmail.Text = item.SubItems[2].Text;
                 textTelefone.Text = item.SubItems[3].Text;
 
+                buttonDelete.Visible = true;// Button delete has staying show
+
                 //MessageBox.Show("Id selecionado:" + idContat_Select);
             }
 
           
         }
+
+        private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            //It has deleting on Data Base
+            deleteContact();
+           
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            deleteContact();
+        }
+
+        private void deleteContact() {
+
+            try
+            {
+                // It has send message to user
+                DialogResult confirm = MessageBox.Show("tem certeza deseja excluir o contato ?",
+                    "Tem certeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.Yes)
+                {
+
+                    conection = new MySqlConnection(data_source);
+                    //It has working MySQL staments
+
+
+                    conection.Open();
+
+                    MySqlCommand cmd = new MySqlCommand(null, conection);
+                    cmd.Connection = conection;
+
+
+
+                    cmd.CommandText = "DELETE FROM contatos WHERE id=@id";
+
+
+
+                    cmd.Parameters.AddWithValue("@id", idContat_Select);
+                    cmd.ExecuteNonQuery();//It has executing the insert in Data Base
+                    cmd.Prepare();
+
+
+                    //It has connection with the Data Base
+
+
+
+                    MessageBox.Show("Contato excluido !", "Com Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    load_contact();
+                    clearButtons();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ocorreu: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conection.Close();
+            }
+
+            //MessageBox.Show("Ira excluir contato: " + idContat_Select);
+
+        }
+
     }
+
+
 }
