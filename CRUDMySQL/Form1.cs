@@ -100,10 +100,7 @@ namespace CRUDMySQL
             {
 
                 MessageBox.Show("Error : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // MessageBox.Show("Error ", +ex.Number + "Ocorreu: " + ex.Message, MessageBoxButtons.OK,
-                //  MessageBoxIcon.Error);
-                // MessageBox.Show(ex.Message);
-
+                
             }
 
             catch (Exception ex)
